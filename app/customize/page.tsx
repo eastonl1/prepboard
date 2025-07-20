@@ -1,5 +1,6 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -9,10 +10,9 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Plus, X, Clock, Calendar } from "lucide-react"
 
-export default function CustomizePage() {
+function CustomizePage() {
   const router = useRouter()
   const searchParams = useSearchParams()
-
   const [cycleDays, setCycleDays] = useState("")
   const [name, setName] = useState("")
   const [timeBlocks, setTimeBlocks] = useState<string[]>([""])
@@ -163,3 +163,4 @@ export default function CustomizePage() {
     </div>
   )
 }
+export default dynamic(() => Promise.resolve(CustomizePage), { ssr: false })
